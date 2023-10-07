@@ -8,9 +8,10 @@ class InputPage extends StatefulWidget {
       required this.title,
       required this.id,
       required this.name,
-      required this.email});
+      required this.email,
+      required this.hobi});
 
-  final String? title, name, email;
+  final String? title, name, email, hobi;
   final int? id;
 
   @override
@@ -20,12 +21,14 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerHobi = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     if (widget.id != null) {
       controllerName.text = widget.name!;
       controllerEmail.text = widget.email!;
+      controllerHobi.text = widget.hobi!;
     }
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +52,12 @@ class _InputPageState extends State<InputPage> {
               labelText: 'Email',
             ),
           ),
+          SizedBox(height: 24),
+          TextField(
+            controller: controllerHobi,
+            decoration: const InputDecoration(
+                border: UnderlineInputBorder(), labelText: 'Hobi'),
+          ),
           SizedBox(height: 48),
           ElevatedButton(
             child: Text('Save'),
@@ -67,12 +76,12 @@ class _InputPageState extends State<InputPage> {
   }
 
   Future<void> addEmployee() async {
-    print(controllerName.text);
-    print(controllerEmail.text);
-    await SQLHelper.addEmployee(controllerName.text, controllerEmail.text);
+    await SQLHelper.addEmployee(
+        controllerName.text, controllerEmail.text, controllerHobi.text);
   }
 
   Future<void> editEmployee(int id) async {
-    await SQLHelper.editEmployee(id, controllerName.text, controllerEmail.text);
+    await SQLHelper.editEmployee(
+        id, controllerName.text, controllerEmail.text, controllerHobi.text);
   }
 }

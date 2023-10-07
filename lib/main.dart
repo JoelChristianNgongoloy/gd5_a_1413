@@ -59,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: 'INPUT EMPLOYEE',
                         id: null,
                         name: null,
-                        email: null)),
+                        email: null,
+                        hobi: null)),
               ).then((_) => refresh());
             },
           ),
@@ -72,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
           return Slidable(
               child: ListTile(
                 title: Text(employee[index]['name']),
-                subtitle: Text(employee[index]['email']),
+                subtitle: Text(
+                    employee[index]['email'] + '\n' + employee[index]['hobi']),
               ),
               actionPane: SlidableDrawerActionPane(),
               secondaryActions: [
@@ -88,7 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               title: 'INPUT EMPLOYEE',
                               id: employee[index]['id'],
                               name: employee[index]['name'],
-                              email: employee[index]['email'])),
+                              email: employee[index]['email'],
+                              hobi: employee[index]['hobi'])),
                     ).then((_) => refresh());
                   },
                 ),
